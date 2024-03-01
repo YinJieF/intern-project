@@ -1,0 +1,3 @@
+1.using function-based code (.py) to interact with gcp
+2.deep study about permissions and roles of gcp
+3.make a detailed powerpoint about it
