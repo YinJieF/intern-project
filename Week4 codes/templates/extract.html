@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extract Page</title>
+    <script>
+        function clearFields() {
+            document.getElementById("input_text").value = "";
+            document.getElementById("name_output").value = "";
+            document.getElementById("birthdate_output").value = "";
+        }
+    </script>
+</head>
+<body>
+    <h1>Info extract</h1>
+    <form action="/extract" method="post">
+        <label for="input_text">Sentence:</label><br>
+        <input type="text" id="input_text" name="input_text" value="{{ input_text }}"><br>
+        <label for="name_output">Name:</label><br>
+        <input type="text" id="name_output" name="name_output" value="{{ name }}" readonly><br>
+        <label for="birthdate_output">Birthdate:</label><br>
+        <input type="text" id="birthdate_output" name="birthdate_output" value="{{ birthdate }}" readonly><br>
+        <button type="submit">Submit</button>
+        <button type="button" onclick="clearFields()">Reset</button>
+    </form>
+</body>
+</html>
