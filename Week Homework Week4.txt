@@ -1,4 +1,4 @@
-cweek4 homework 
+week4 homework 
 1.Build Ner dataset(1000 extract)
  1.1 run on  vertext ai notebook
     1.2 bigquery sdk  connect  https://github.com/GoogleCloudPlatform/vertex-ai-samples/tree/main/notebooks/official 
