@@ -1,0 +1,5 @@
+1. Traing ner model custom dataset(study )
+https://keras.io/examples/nlp/ner_transformers/
+
+2. inference with api (flask/gradio/streamlit)
+畫面 https://www.gradio.app/guides/named-entity-recognition
