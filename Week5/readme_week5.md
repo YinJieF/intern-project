@@ -2,7 +2,7 @@
 This week conclude of training NER model, using Gradio as a UI for Inference
 # Training
 ## requirement
-###tensorflow version == 2.15.0
+### tensorflow version == 2.15.0
 ## steps
 * ### 1. NER_own.ipynb, *bigquery data
 * ### 2. after training, two things will produce
