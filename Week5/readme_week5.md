@@ -11,6 +11,7 @@ This week conclude of training NER model, using Gradio as a UI for Inference
 
 # Inference
 ## requirement
+* ### same version of tensorflow == 2.15.0
 * ### 2.1 vocabulary.pkl (for dictionary lookup)
 * ### 2.2 ner_model folder(model weight for inference)
 ## steps
