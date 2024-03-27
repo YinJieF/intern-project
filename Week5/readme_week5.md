@@ -1,12 +1,18 @@
-# Run NER model
+## Introduction
+This week conclude of training NER model, using Gradio as a UI for Inference
 ## Training
-### tensorflow == 2.15.0
+### requirement
+tensorflow version == 2.15.0
+### steps
 1. NER_own.ipynb, *bigquery data
-2. after training, one file and one folder will produce
->vocabulary.pkl (for dictionary lookup)
->ner_model (model weight for inference)
+2. after training, two things will produce
+2.1 vocabulary.pkl (for dictionary lookup)
+2.2 ner_model (model weight for inference)
+
 ## Inference
-1. ner.py
->preprocess data and load model
-2. app.py
+### requirement
+2.1 vocabulary.pkl (for dictionary lookup)
+2.2 ner_model folder(model weight for inference)
+### steps
+run app.py
 >gradio server
