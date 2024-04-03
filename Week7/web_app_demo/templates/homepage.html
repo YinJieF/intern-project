@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Homepage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .toggle-buttons {
+            display: flex;
+            justify-content: space-between; /* Align button and bookmarks to each end */
+            align-items: center; /* Center vertically */
+            margin-bottom: 20px;
+            padding: 0 20px; /* Add padding to space out elements */
+        }
+        .bookmark-container {
+            display: flex;
+            justify-content: space-between; /* Distribute bookmarks evenly */
+            width: 100%; /* Fill up entire horizontal space */
+            margin-top: 10px; /* Add margin to space out bookmarks */
+        }
+        .bookmark {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 0; /* Adjust padding as needed */
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease;
+            flex-grow: 0.9; /* Fill up remaining space */
+            text-align: center; /* Center text horizontally */
+        }
+        .bookmark:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="toggle-buttons">
+        <div></div> <!-- Empty div to align buttons to the left -->
+        <div class="bookmark-container">
+            <a href="/data" class="bookmark">Data</a>
+            <a href="/training" class="bookmark">Training</a>
+            <a href="/inference" class="bookmark">Inference</a>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Welcome to the Homepage</h1>
+        <!-- Add your content below this line -->
+    </div>
+</body>
+</html>

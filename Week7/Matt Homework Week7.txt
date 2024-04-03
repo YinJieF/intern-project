@@ -1,0 +1,11 @@
+week7 homework 
+
+1. DDD ML web (Training)/flask
+   參考ddd ml pdf
+   
+2.NER Model change bert
+  https://www.kaggle.com/code/dianalaveena/ner-using-bert-pytorch
+  https://keras.io/examples/nlp/masked_language_modeling/
+  https://keras.io/examples/nlp/ner_transformers/
+
+https://apoorvnandan.github.io/2020/08/02/bert-ner/
