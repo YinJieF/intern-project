@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Query Selection</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <form action="/" method="get">
+        <button type="submit">Go to Home Page</button>
+    </form>
+    <form action="/data" method="get">
+        <button type="submit">Go to Data Page</button>
+    </form>
+    <form action="/train" method="get"> <!-- Redirect to '/train' -->
+        <button type="submit">Go to Train Page</button> <!-- Add button to redirect to train page -->
+    </form>
+    <form action="/predict" method="get"> <!-- Redirect to '/predict' -->
+        <button type="submit">Go to Predict Page</button> <!-- Add button to redirect to predict page -->
+    </form>
+    <h2>Training Information</h2>
+
+    <form id="queryForm">
+        <label for="dataset">Select Dataset:</label>
+        <select id="dataset" name="dataset">
+            {% for dataset in datasets %}
+                <option value="{{ dataset }}">{{ dataset }}</option>
+            {% endfor %}
+        </select><br><br>
+        <label for="datasetSize">Dataset Size:</label>
+        <input type="number" id="datasetSize" name="datasetSize"><br><br>
+        <label for="model">Select Model:</label>
+        <select id="model" name="model">
+            <option value="NERModel">NERModel</option>
+        </select><br><br>
+        <button type="button" onclick="submitQuery()">Start Training</button>
+    </form>
+
+    <table id="trainTable">
+        <thead>
+            <tr>
+                <th>UUID</th>
+                <th>Username</th>
+                <th>Status</th>
+                <th>Dataset Description</th>
+                <th>Job Created Time</th>
+                <th>Job Ended Time</th>
+                <th>Job Duration</th>
+                <th>Model Path</th>
+                <th>Result Path</th>
+            </tr>
+        </thead>
+        <tbody id="trainTableBody">
+            {% for info in training_info %}
+                <tr>
+                    <td>{{ info.UUID }}</td>
+                    <td>{{ info.Username }}</td>
+                    <td>{{ info.Status }}</td>
+                    <td>{{ info['Dataset Description'] }}</td>
+                    <td>{{ info['Job Created Time'] }}</td>
+                    <td>{{ info['Job Ended Time'] }}</td>
+                    <td>{{ info['Job Duration'] }}</td>
+                    <td>{{ info['Model Path'] }}</td>
+                    <td>{{ info['Result Path'] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        // Function to submit query
+        function submitQuery() {
+            var datasetSize = document.getElementById("datasetSize").value;
+            var selectedDataset = document.getElementById("dataset").value;
+            var selectedModel = document.getElementById("model").value;
+            // Echo statement
+            console.log("Submit button clicked!");
+            console.log("Dataset: " + selectedDataset + ", Size: " + datasetSize + ", Model: " + selectedModel);
+
+            // Send the dataset size, selected dataset, and model to the server using AJAX
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/train");
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            
+            xhr.onload = function() {
+                if (xhr.status == 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    // Clear previous data
+                    var trainTableBody = document.getElementById("trainTableBody");
+                    trainTableBody.innerHTML = '';
+                    // Append updated training information to the table
+                    response.train_info.forEach(function(row) {
+                        var newRow = trainTableBody.insertRow();
+                        newRow.insertCell(0).textContent = row.UUID;
+                        newRow.insertCell(1).textContent = row.Username;
+                        newRow.insertCell(2).textContent = row.Status;
+                        newRow.insertCell(3).textContent = row['Dataset Description'];
+                        newRow.insertCell(4).textContent = row['Job Created Time'];
+                        newRow.insertCell(5).textContent = row['Job Ended Time'];
+                        newRow.insertCell(6).textContent = row['Job Duration'];
+                        newRow.insertCell(7).textContent = row['Model Path'];
+                        newRow.insertCell(8).textContent = row['Result Path'];
+                    });
+                } else {
+                    alert("Error: " + xhr.status);
+                }
+            };
+            xhr.send(JSON.stringify({ datasetSize: datasetSize, dataset: selectedDataset, model: selectedModel }));
+        }
+    </script>
+</body>
+</html>
