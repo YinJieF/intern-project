@@ -1,0 +1,18 @@
+week8 homework 
+
+https://www.cosmicpython.com/book/part1.html
+https://github.com/vklap/py_ddd_framework
+
+1. DDD ML web Training 功能實現
+   參考ddd ml 
+   
+
+2.NER Model change bert
+  https://www.kaggle.com/code/dianalaveena/ner-using-bert-pytorch
+  
+  run own dataset in bert-pytorch
+  
+  
+3.report agenda
+
+  3.1 Gen ai -->法院判例--->information extract---> NER(transformer bert )--->demo ddd web (mlops 平台)
