@@ -1,3 +1,5 @@
+# auto_update_bq_v3.py
+Since the dataset are very unbalance, the B-PER and I-PER is add to self-label column, hence, rebuild a BigQuery table
 # NER Web Demo
 ## Overview
 
