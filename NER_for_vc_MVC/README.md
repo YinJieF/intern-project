@@ -6,7 +6,7 @@ To run the application locally, follow these steps:
 1. Clone the repository:
 2. Install dependencies:
 3. Set up your own credentials by (Downlaod the json file and put it in correct directory)
-4. Run the application:
+4. Run the application: main.py
 
 ## Changes
 - Word tokenize before prediction (app/inference/predict.py)
