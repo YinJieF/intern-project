@@ -9,4 +9,4 @@ To run the application locally, follow these steps:
 4. Run the application:
 
 ## Changes
-- Word tokenize before prediction (predict.py)
+- Word tokenize before prediction (app/inference/predict.py)
