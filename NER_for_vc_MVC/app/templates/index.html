@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index Page</title>
+</head>
+<style>
+    body {
+        background-color: #9af59a; /* Set the background color for the entire page */
+    }
+</style>
+<body>
+    <h1>Welcome to the Index Page</h1>
+    <form action="/" method="get">
+        <button type="submit">Go to Home Page</button>
+    </form>
+    <form action="/data" method="get">
+        <button type="submit">Go to Data Page</button>
+    </form>
+    <form action="/train" method="get"> <!-- Redirect to '/train' -->
+        <button type="submit">Go to Train Page</button> <!-- Add button to redirect to train page -->
+    </form>
+    <form action="/inference" method="get"> <!-- Redirect to '/predict' -->
+        <button type="submit">Go to Inference Page</button> <!-- Add button to redirect to predict page -->
+    </form>
+</body>
+</html>

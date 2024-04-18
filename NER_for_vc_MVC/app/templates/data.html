@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Query Selection</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <form action="/" method="get">
+        <button type="submit">Go to Home Page</button>
+    </form>
+    <form action="/data" method="get">
+        <button type="submit">Go to Data Page</button>
+    </form>
+    <form action="/train" method="get"> <!-- Redirect to '/train' -->
+        <button type="submit">Go to Train Page</button> <!-- Add button to redirect to train page -->
+    </form>
+    <form action="/inference" method="get"> <!-- Redirect to '/predict' -->
+        <button type="submit">Go to Inference Page</button> <!-- Add button to redirect to predict page -->
+    </form>
+    <h2>Preview Dataset and Size</h2>
+    <form id="queryForm">
+        <label for="dataset">Select Dataset:</label>
+        <select id="dataset" name="dataset">
+            {% for dataset in datasets %}
+                <option value="{{ dataset }}">{{ dataset }}</option>
+            {% endfor %}
+        </select><br><br>
+        <label for="datasetSize">Extract Size:</label>
+        <input type="number" id="datasetSize" name="datasetSize"><br><br>
+        <button type="button" onclick="submitQuery()">Select</button>
+    </form>
+
+    <div id="queryResult">
+        <!-- Dataset size and head will be displayed here after submission -->
+    </div>
+
+    <script>
+        // Function to submit query
+        function submitQuery() {
+            var datasetSize = document.getElementById("datasetSize").value;
+            var selectedDataset = document.getElementById("dataset").value;
+            
+            // Echo statement
+            console.log("Submit button clicked!");
+            console.log("Dataset: " + selectedDataset + ", Size: " + datasetSize);
+
+            // Send the dataset size and selected dataset to the server using AJAX
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/data");
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            
+            xhr.onload = function() {
+                if (xhr.status == 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    var datasetSizeText = "Dataset Size: Rows - " + response.dataset_shape.rows + ", Columns - " + response.dataset_shape.columns;
+                    var datasetHeadText = "<h3>Head of Dataset</h3><table>";
+                    
+                    // Generate table headers dynamically based on dataset columns
+                    datasetHeadText += "<tr>";
+                    for (var i = 0; i < response.dataset_columns.length; i++) {
+                        datasetHeadText += "<th>" + response.dataset_columns[i] + "</th>";
+                    }
+                    datasetHeadText += "</tr>";
+                    
+                    // Generate table rows dynamically based on dataset head
+                    for (var i = 0; i < response.dataset_head.length; i++) {
+                        datasetHeadText += "<tr>";
+                        for (var j = 0; j < response.dataset_columns.length; j++) {
+                            var columnName = response.dataset_columns[j];
+                            datasetHeadText += "<td>" + response.dataset_head[i][columnName] + "</td>";
+                        }
+                        datasetHeadText += "</tr>";
+                    }
+                    datasetHeadText += "</table>";
+                    document.getElementById("queryResult").innerHTML = datasetSizeText + "<br>" + datasetHeadText;
+                } else {
+                    alert("Error: " + xhr.status);
+                }
+            };
+            xhr.send(JSON.stringify({ datasetSize: datasetSize, dataset: selectedDataset }));
+        }
+    </script>
+</body>
+</html>
