@@ -64,6 +64,8 @@ def add_record_begin(dataset_name, dataset_size):
     except Exception as e:
         print(f"Error: {e}")
 
+    return job_uuid
+
 def add_record_done(job_uuid, model_path, result_path):
     credentials = set_credential()
     client = bigquery.Client(credentials=credentials)
@@ -73,7 +75,6 @@ def add_record_done(job_uuid, model_path, result_path):
         SET `Status` = 'Completed', `Job Ended Time` = '{end_time}', `Job Duration` = TIMESTAMP_DIFF(TIMESTAMP('{end_time}'), TIMESTAMP(`Job Created Time`), SECOND), `Model Path` = '{model_path}', `Result Path` = '{result_path}'
         WHERE UUID = '{job_uuid}'
     """
-
     try:
         client.query(query)
     except Exception as e:

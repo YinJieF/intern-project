@@ -1,7 +1,7 @@
 from time import time
 from google.cloud import bigquery
 from app.credentials.set_credential import set_credential
-
+#from set_credential import set_credential
 # Get the list of datasets in the bigquery
 def get_bq_tables(dataset_id):
     credentials = set_credential()
@@ -47,7 +47,6 @@ def load_data(PROJECT_ID, DATASET_ID, TABLE_ID, size):
                                       project=PROJECT_ID)
     
     df = read_bq(PROJECT_ID, DATASET_ID, TABLE_ID, bigquery_client, size)
-    print(df)
     df = data_preprocessing(df)
 
     return df
@@ -55,12 +54,12 @@ def load_data(PROJECT_ID, DATASET_ID, TABLE_ID, size):
 def data_description(df):
     # Get the head of the dataset
     dataset_head = df.head().to_dict(orient='records')
-        
+    data_html = df.iloc[0:5].to_html(index=False)
+    data_html = data_html[data_html.find('\n'):data_html.rfind('\n')]
     # Convert dataset shape to dictionary
     dataset_shape = {"rows": df.shape[0], "columns": df.shape[1]}
-        
-    dataset_columns = df.columns.tolist()
+    
+    return data_html, dataset_shape
 
-    return dataset_shape, dataset_head, dataset_columns
-
-#print(load_data('intern-project-415606', 'Criminal_Dataset', 'criminal_data_inorder', 2000))
+# df = load_data('intern-project-415606', 'Criminal_Dataset', 'criminal_data_inorder', 2000)
+# print(data_description(df))

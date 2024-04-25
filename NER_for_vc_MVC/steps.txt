@@ -1,0 +1,7 @@
+1. build docker image
+   a. dockerfile, requirement
+   b. build
+2. push to gcp gcr
+   a. auth
+   b. tag docker image
+   c. push

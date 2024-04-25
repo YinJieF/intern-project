@@ -1,9 +1,8 @@
 import os
-#os.environ["KERAS_BACKEND"] = "tensorflow"
 from tensorflow import keras
 import tensorflow as tf
 from keras import layers
-from gcloud import storage
+from google.cloud import storage
 from app.credentials.set_credential import set_credential
 import traceback
 
@@ -105,18 +104,19 @@ def save_model(model, filepath):
     file_count = len(os.listdir(directory))
     filepath = f"{directory}/ner_model_{file_count}.keras"
     model.save(filepath)
+    return filepath
 
-    # credential = set_credential()
-    # storage_client = storage.Client(credentials=credential)
-    # storage_client = storage.Client.from_service_account_json("app/credentials/intern-project-415606-af2c42eb5ad4.json")
-    # bucket = storage_client.get_bucket('ner_model_vc')
-    # print(bucket)
-    # blob = bucket.blob(filepath[-17:])
-    # try:
-    #     blob.upload_from_filename(filepath)
-    # except Exception as e:
-    #     error_info = str(e) + traceback.format_exc()
-    #     print(f"Error: {error_info}")
-    #     print(f"Error: {e}")
+def save_model_to_cloud(source_file_name, destination_blob_name):
+    bucket_name = "ner_model_vc"
+    storage_client = storage.Client(credentials=set_credential())
+    bucket = storage_client.bucket(bucket_name)
+    blob = bucket.blob(destination_blob_name)
+    generation_match_precondition = 0
+    print('Uploading file to Cloud Storage...')
+    blob.upload_from_filename(source_file_name, if_generation_match=generation_match_precondition)
 
+    print(
+        f"File {source_file_name} uploaded to {destination_blob_name}."
+    )
+    return f"gs://{bucket_name}/{destination_blob_name}"
 

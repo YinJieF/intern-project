@@ -3,6 +3,8 @@
 # 3. save result
 
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+from app.credentials.set_credential import set_credential
+from google.cloud import storage
 from tabulate import tabulate
 import numpy as np
 import os
@@ -101,12 +103,22 @@ def evaluate_model(ner_model, val_data, mapping, filepath):
     directory = os.path.dirname(filepath)
     file_count = len(os.listdir(directory))
     filepath = f"{directory}/model_evaluate_{file_count}.txt"
-    
     with open(filepath, "w") as f:
         f.write("Overall Accuracy:".ljust(20) + str(overall_accuracy['accuracy']) + "\n")
         f.write("Overall Precision:".ljust(20) + str(overall_accuracy['precision']) + "\n")
         f.write("Overall Recall:".ljust(20) + str(overall_accuracy['recall']) + "\n")
         f.write("Overall F1-score:".ljust(20) + str(overall_accuracy['f1']) + "\n")
         f.write(table)
+    print("\nModel evaluation result is saved in " + filepath)
 
-    return 'Evaluation results saved successfully in ' + filepath
+    bucket_name = "ner_model_vc"
+    destination_blob_name = "model_evaluation_result/" + filepath[-20:]
+    storage_client = storage.Client(credentials=set_credential())
+    bucket = storage_client.bucket(bucket_name)
+
+    blob = bucket.blob(destination_blob_name)
+    blob.upload_from_filename(filepath)
+
+    print(f"File {filepath} uploaded to {destination_blob_name}.")
+
+    return f"gs://{bucket_name}/{destination_blob_name}"

@@ -104,7 +104,7 @@
             var inputText = document.getElementById('input_text').value;
             
             // Send an AJAX request to the Flask endpoint for prediction
-            fetch('/predict', {
+            fetch('/inference', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
