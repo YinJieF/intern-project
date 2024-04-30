@@ -102,7 +102,7 @@ def prediction(data):
     data = format_datatype(data)
     # Register the custom loss function with TensorFlow
     tf.keras.utils.get_custom_objects()['CustomNonPaddingTokenLoss'] = CustomNonPaddingTokenLoss
-    # Load model
+    # Load mode
     loaded_model = tf.keras.models.load_model("./app/inference/model_for_predict/ner_model.keras")
 
     all_predicted_tag_ids = []

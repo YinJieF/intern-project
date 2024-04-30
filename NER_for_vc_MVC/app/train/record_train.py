@@ -2,6 +2,7 @@
 # 1. create table (try)
 # 2. insert data
 import uuid   
+import pandas as pd
 from datetime import datetime
 from google.cloud import bigquery
 from app.credentials.set_credential import set_credential
@@ -21,8 +22,11 @@ def get_training_info():
         if training_record['Job Ended Time'] == training_record['Job Created Time']:
             training_record['Job Ended Time'] = 'In Progress'
     #sort by job created time
-    training_info = sorted(training_info, key=lambda x: x['Job Created Time'], reverse=True)
-    return training_info
+    train_info = sorted(training_info, key=lambda x: x['Job Created Time'], reverse=True)
+    train_html = pd.DataFrame(train_info).to_html(index=False)
+    train_html = train_html[train_html.find('\n'):train_html.rfind('\n')]
+
+    return train_info, train_html
 
 def create_table(project_id, dataset_id, table_id_write):
     credentials = set_credential()

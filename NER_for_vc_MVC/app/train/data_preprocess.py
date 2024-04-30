@@ -96,6 +96,7 @@ def data_preprocessing(dataset, batch_size):
     dataset_copy = dataset.copy()
     dataset_copy['self_label'] = dataset_copy['self_label'].map(label_map)
     dataset = dataset_copy
+    dataset = dataset.sort_values(by='sequence')
     # Grouping the dataset by 'extract_id' and aggregating the 'text' and 'self_label' columns into lists
     grouped_data = dataset.groupby('extract_id').agg({'text': list, 'self_label': list}).reset_index()
     
