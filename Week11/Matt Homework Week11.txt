@@ -1,0 +1,11 @@
+week10 homework 
+
+1.  NER Web train/inference 介面完善
+    run on gcp cloud/bigquery /bucket
+ provide public url
+   
+  
+2.RAG vector save to bigquery
+  wrodembedding /vector / bigquery
+  
+3. report ptt demo
