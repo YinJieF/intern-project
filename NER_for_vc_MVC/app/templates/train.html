@@ -32,7 +32,7 @@
         <div class="row my-3 mx-5">
             <h1 class="font-weight-light">Model Training</h1>
             <p>Explore the Model Training Interface, where you can train models with a simple click. Choose your dataset and size effortlessly, tailored for Vietnamese crime data. With intuitive controls, select your dataset and size, initiating the training process seamlessly. This user-friendly interface puts the power of model training in your hands, making Named Entity Recognition (NER) technology accessible to you</p>
-            
+            <p>探索命名實體識別（NER）技術模型訓練界面，您可以通過簡單點擊，選擇越南犯罪數據，選擇數據集的大小，開始模型訓練過程。</p>
             <!--<a class="btn btn-primary col-lg-2" href="#!">Call to Action!</a>-->
         </div>
 
@@ -83,7 +83,6 @@
                 <col style="width: 10%;">
                 <col style="width: 5%;">
                 <col style="width: 10%;">
-                <col style="width: 10%;">
             </colgroup>
             <thead>
                 <tr>
@@ -95,7 +94,6 @@
                     <th scope="col">Job Ended Time</th>
                     <th scope="col">Job Duration</th>
                     <th scope="col">Model Path</th>
-                    <th scope="col">Result Path</th>
                 </tr>
             </thead>
             <tbody id="trainTableBody">
@@ -109,7 +107,6 @@
                         <td>{{ info['Job Ended Time'] }}</td>
                         <td>{{ info['Job Duration'] }}</td>
                         <td>{{ info['Model Path'] }}</td>
-                        <td>{{ info['Result Path'] }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -166,7 +163,6 @@
                                             "<col style='width: 10%;'>" +
                                             "<col style='width: 10%;'>" +
                                             "<col style='width: 5%;'>" +
-                                            "<col style='width: 10%;'>" +
                                             "<col style='width: 10%;'>" +
                                         "</colgroup>" +
                                             train_html + // Insert your dataset_html here

@@ -23,7 +23,7 @@ def get_training_info():
             training_record['Job Ended Time'] = 'In Progress'
     #sort by job created time
     train_info = sorted(training_info, key=lambda x: x['Job Created Time'], reverse=True)
-    train_html = pd.DataFrame(train_info).to_html(index=False)
+    train_html = pd.DataFrame(train_info).drop('Result Path', axis=1).to_html(index=False)
     train_html = train_html[train_html.find('\n'):train_html.rfind('\n')]
 
     return train_info, train_html

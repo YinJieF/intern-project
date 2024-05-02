@@ -5234,6 +5234,45 @@ textarea.form-control-lg {
   word-wrap: break-word;
 }
 
+.M {
+  background-color: #ffcccc; /* Change this to the color you want for 'M' entities */
+  padding: 2px;
+}
+
+.N {
+  background-color: #ccffcc; /* Change this to the color you want for 'N' entities */
+  padding: 2px;
+}
+
+.B-PER {
+  background-color: #ffcc99; /* Change this to the color you want for 'B-PER' entities */
+  padding: 2px;
+}
+
+.I-PER {
+  background-color: #ffcc99; /* Change this to the color you want for 'I-PER' entities */
+  padding: 2px;
+}
+
+.output-box {
+  border: 2px solid #565e64; /* Change this to the color you want for the border */
+  border-radius: 25px;
+  padding: 10px;
+  margin: 10px 0;
+  width: 625px; /* Adjust based on your needs */
+  height: 250px; /* Adjust based on your needs */
+  overflow: auto; /* Adds scrollbars if content overflows */
+  overflow-anchor: none; /* Prevents scrollbars from jumping around */
+  background-color: #f0f0f0; /* Change this to the color you want for the background */
+}
+
+.beautiful-font {
+  font-family: 'Arial', sans-serif; /* You can change this to any font you like */
+  font-size: 1em;
+  line-height: 1.6;
+  color: #333; /* Dark grey color */
+}
+
 .modal {
   --bs-modal-zindex: 1055;
   --bs-modal-width: 500px;
@@ -7550,6 +7589,11 @@ textarea.form-control-lg {
 .mx-5 {
   margin-right: 3rem !important;
   margin-left: 3rem !important;
+}
+
+.mx-6 {
+  margin-right: 4rem !important;
+  margin-left: 4rem !important;
 }
 
 .mx-auto {

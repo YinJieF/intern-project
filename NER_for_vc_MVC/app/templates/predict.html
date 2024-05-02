@@ -1,133 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prediction Result</title>
-    <style>
-        .N { color: red; }
-        .M { color: green; }
-        .B-PER { color: blue; }
-        .I-PER { color: black; }
-        .other { color: black; }
-        .container {
-            display: flex;
-            flex-direction: row; /* Change to row direction */
-            justify-content: space-around; /* Adjust spacing */
-            align-items: flex-start; /* Align items at the top */
-            width: 100%; /* Full width */
-            padding-top: 20px; /* Add some top padding */
-        }
-        .box-container {
-            display: flex;
-            flex-direction: column;
-            width: 50%; /* Take half of the container width */
-            margin-bottom: 20px;
-        }
-        .input-box, .output-box {
-            flex: 1;
-            padding: 10px;
-            margin: 10px;
-            border: 1px solid #ccc;
-        }
-        .input-text {
-            width: 100%;
-            height: 20  0px;
-        }
-        .tag-box {
-            height: 200px;
-            overflow-y: auto;
-        }
-        .predict-button {
-            width: 120px;
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body>
-    <form action="/" method="get">
-        <button type="submit">Go to Home Page</button>
-    </form>
-    <form action="/data" method="get">
-        <button type="submit">Go to Data Page</button>
-    </form>
-    <form action="/train" method="get"> <!-- Redirect to '/train' -->
-        <button type="submit">Go to Train Page</button> <!-- Add button to redirect to train page -->
-    </form>
-    <form action="/inference" method="get"> <!-- Redirect to '/predict' -->
-        <button type="submit">Go to Inference Page</button> <!-- Add button to redirect to predict page -->
-    </form>
-    <h1>NER tags predictions</h1>
-    
-    <form>
-        <label for="model">Select Model:</label>
-        <select id="model" name="model">
-            <option value="NERModel">NERModel_v1</option>
-            <option value="NERModel_v2">NERModel_v2</option>
-        </select><br><br>
-    </form>
-    <div class="container">
-        <div class="box-container">
-            <form id="prediction-form">
-                <div class="input-box">
-                    <h3>Input Text:</h3>
-                    <textarea id="input_text" name="input_text" rows="10" cols="80" class="input-text">{{ input_text }}</textarea>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>NER web</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='/assets/favicon.ico')}}" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{{ url_for('static', filename='/css/styles.css')}}" rel="stylesheet" />
+        <script src="{{ url_for('static', filename='js/scripts.js')}}"></script>
+    </head>
+    <body>
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container px-5">
+                <a class="navbar-brand" href="/">CDCDA Data Team GenAI Platform</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/data">Data</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/train">Training</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/inference">Inference</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="row my-3 mx-5">
+            <h1 class="font-weight-light">Model Inference</h1>
+            <p>NER Web quickly figures out important stuff like names and birthdates from Vietnamese crime data. Just put in your text, and our tool shows you the important bits in an easy way.</p>
+            <p my-0>NER Web快速從越南犯罪數據中找出重要信息，如姓名和出生日期。 只需輸入文本，我們的工具就會以簡單的方式向您顯示重要部分。</p>
+            <form>
+                <div class="row">
+                    <div class="col-auto">
+                        <select class="form-select" id="datasetDropdown" aria-label="Select Dataset">
+                            <option value="NERModel">NERModel_v1</option>
+                            <option value="NERModel_v2">NERModel_v2</option>
+                        </select>
+                    </div>
+                    <div class="col-auto">
+                        <button id="submitButton" type="button" class="btn btn-primary" onclick="predict()">Predict</button>
+            
+                        <button id="loadingButton" class="btn btn-primary" type="button" style="display: none;" disabled>
+                          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                          <span>Loading...</span>
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
-        
-        <div class="box-container">
-            {% if token_tag_pairs %}
-            <div class="output-box">
-                <h3>Predicted Tags:</h3>
-                <div class="tag-box">
-                    {% for token, tag in token_tag_pairs %}
-                        <span class="{{ tag }}">{{ token }}</span>
-                        &nbsp; <!-- Add a space between tokens -->
-                        &nbsp; <!-- Add a space between tokens -->
-                    {% endfor %}
+
+        <div class="container mx-5">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="box-container">
+                        <form id="prediction-form">
+                            <h3>Input Text:</h3>
+                            <div class="output-box">
+                                <textarea id="input_text" name="input_text" rows="9" cols="60" class="form-control" style="padding:0;margin:0">{{ input_text }}</textarea>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="box-container">
+                        {% if token_tag_pairs %}
+                        <h3>Predicted Tags:</h3>
+                        <div class="output-box">
+                            <div class="tag-box">
+                                {% for token, tag in token_tag_pairs %}
+                                    <span class="{{ tag }}">{{ token }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
-            {% endif %}
-            <button class="predict-button" onclick="predict()">Predict</button>
         </div>
-    </div>
+
+        <div row>
+            <div col>
+                <div class="legend mx-6 my-1">
+                    <div style="margin-bottom: 10px;">
+                    <span style="background-color: #ccffcc; padding: 2px;">__N__</span> - Criminal Name
+                    </div>
+
+                    <div style="margin-bottom: 10px;">
+                        <span style="background-color: #ffcccc; padding: 2px;">__M__</span> - Birthdates / Dates
+                    </div>
+                    
+                    <div style="margin-bottom: 10px;">
+                        <span style="background-color: #ffcc99; padding: 2px;">B-PER</span> - Person
+                </div>
+            </div>
+        </div>
+
+      
+        
     
+
     <script>
-        function predict() {
-            // Fetch the input text from the textarea
-            var inputText = document.getElementById('input_text').value;
-            
-            // Send an AJAX request to the Flask endpoint for prediction
-            fetch('/inference', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ input_text: inputText })
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Update the output box with the predicted tags
-                var tagBox = document.querySelector('.tag-box');
-                tagBox.innerHTML = '';
-                data.token_tag_pairs.forEach(pair => {
-                    var span = document.createElement('span');
-                    span.className = pair[1];
-                    span.textContent = pair[0];
-                    tagBox.appendChild(span);
-                });
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        }
-    </script>
-    
-</body>
+      function predict() {
+          
+          // Disable the select button
+          document.getElementById('submitButton').setAttribute('disabled', 'disabled');
+          // Hide the select button and show the loading button
+          document.getElementById('submitButton').style.display = 'none';
+          document.getElementById('loadingButton').style.display = 'block'; // or 'inline' depending on the desired display type
+
+          
+          // Fetch the input text from the textarea
+          var inputText = document.getElementById('input_text').value;
+
+          // Send an AJAX request to the Flask endpoint for prediction
+          fetch('/inference', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ input_text: inputText })
+          })
+          .then(response => response.json())
+          .then(data => {
+              // Update the output box with the predicted tags
+              var tagBox = document.querySelector('.tag-box');
+              tagBox.innerHTML = '';
+              data.token_tag_pairs.forEach(pair => {
+                  var span = document.createElement('span');
+                  span.className = pair[1];
+                  span.textContent = pair[0];
+                  tagBox.appendChild(span);
+                  // add a space between tokens
+                  tagBox.appendChild(document.createTextNode(' '));
+              });
+              document.getElementById('submitButton').removeAttribute('disabled');
+              // Show the select button and hide the loading button
+              document.getElementById('submitButton').style.display = 'block';
+              document.getElementById('loadingButton').style.display = 'none'; // or 'inline' depending on the desired display type
+          })
+          .catch(error => {
+              console.error('Error:', error);
+          });
+
+      }
+     </script>
+        
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{{ url_for('static', filename='js/scripts.js')}}"></script>
+    </body>
 </html>
