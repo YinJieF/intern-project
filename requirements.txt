@@ -1,0 +1,13 @@
+Flask==3.0.2
+underthesea
+google-api-python-client
+google-cloud-bigquery
+google-cloud-storage
+keras==2.15.0
+tensorflow==2.15.0
+numpy
+pandas
+scikit-learn
+datasets
+tabulate
+db-dtypes
