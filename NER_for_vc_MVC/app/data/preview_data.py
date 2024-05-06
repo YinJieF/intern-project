@@ -54,7 +54,7 @@ def load_data(PROJECT_ID, DATASET_ID, TABLE_ID, size):
 def data_description(df):
     # Get the head of the dataset
     dataset_head = df.head().to_dict(orient='records')
-    data_html = df.iloc[0:5].to_html(index=False)
+    data_html = df.to_html(index=False)
     data_html = data_html[data_html.find('\n'):data_html.rfind('\n')]
     # Convert dataset shape to dictionary
     dataset_shape = {"rows": df.shape[0], "columns": df.shape[1]}

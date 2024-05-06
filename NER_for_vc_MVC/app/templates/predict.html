@@ -33,7 +33,7 @@
         <div class="row my-3 mx-5">
             <h1 class="font-weight-light">Model Inference</h1>
             <p>NER Web quickly figures out important stuff like names and birthdates from Vietnamese crime data. Just put in your text, and our tool shows you the important bits in an easy way.</p>
-            <p my-0>NER Web快速從越南犯罪數據中找出重要信息，如姓名和出生日期。 只需輸入文本，我們的工具就會以簡單的方式向您顯示重要部分。</p>
+            <p my-0>NER Web快速從句子中找出重要信息，如姓名和出生日期。 只需輸入句子，我們的工具就會以簡單的方式向您顯示重要部分。</p>
             <form>
                 <div class="row">
                     <div class="col-auto">
@@ -145,6 +145,10 @@
           })
           .catch(error => {
               console.error('Error:', error);
+              document.getElementById('submitButton').removeAttribute('disabled');
+              // Show the select button and hide the loading button
+              document.getElementById('submitButton').style.display = 'block';
+              document.getElementById('loadingButton').style.display = 'none'; // or 'inline' depending on the desired display type
           });
 
       }

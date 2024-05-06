@@ -109,7 +109,6 @@ def evaluate_model(ner_model, val_data, mapping, filepath):
         f.write("Overall Recall:".ljust(20) + str(overall_accuracy['recall']) + "\n")
         f.write("Overall F1-score:".ljust(20) + str(overall_accuracy['f1']) + "\n")
         f.write(table)
-    print("\nModel evaluation result is saved in " + filepath)
 
     bucket_name = "ner_model_vc"
     destination_blob_name = "model_evaluation_result/" + filepath[-20:]
@@ -121,4 +120,4 @@ def evaluate_model(ner_model, val_data, mapping, filepath):
 
     print(f"File {filepath} uploaded to {destination_blob_name}.")
 
-    return f"gs://{bucket_name}/{destination_blob_name}"
+    return "Accuracy: " + str("{:.3f}".format(overall_accuracy['accuracy'])) + "  Recall: " + str("{:.3f}".format(overall_accuracy['recall'])), f"gs://{bucket_name}/{destination_blob_name}"

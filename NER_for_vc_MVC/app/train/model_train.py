@@ -30,8 +30,8 @@ def training(table_id = 'criminal_data_inorder', size = 100):
     # Evaluate model
     filepath_result = "app/train/resources/model_evaluate/evaluation_result.txt"
     mapping = data_preprocess.make_tag_lookup_table()
-    filepath_result_cloud = (metrics.evaluate_model(ner_model, test_data, mapping, filepath_result))
-    add_record_done(job_uuid, filepath_model_cloud, filepath_result_cloud)
+    result, filepath_result_cloud = (metrics.evaluate_model(ner_model, test_data, mapping, filepath_result))
+    add_record_done(job_uuid, filepath_model_cloud, result, filepath_result_cloud)
     return filepath_model, filepath_result, filepath_model_cloud, filepath_result_cloud
 
 #training('criminal_data_inorder', 100)

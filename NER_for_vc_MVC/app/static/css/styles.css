@@ -5266,6 +5266,16 @@ textarea.form-control-lg {
   background-color: #f0f0f0; /* Change this to the color you want for the background */
 }
 
+#dataTable {
+  table-layout: fixed;
+  width: 90%;
+}
+
+.dataTables_pager {
+  display: flex;
+  justify-content: center;
+}
+
 .beautiful-font {
   font-family: 'Arial', sans-serif; /* You can change this to any font you like */
   font-size: 1em;
