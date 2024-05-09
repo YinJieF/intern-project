@@ -98,12 +98,18 @@ def format_datatype(data):
 
     return finalize_input
 
-def prediction(data):
-    data = format_datatype(data)
+def load_model():
     # Register the custom loss function with TensorFlow
     tf.keras.utils.get_custom_objects()['CustomNonPaddingTokenLoss'] = CustomNonPaddingTokenLoss
     # Load mode
     loaded_model = tf.keras.models.load_model("./app/inference/model_for_predict/ner_model.keras")
+    return loaded_model
+
+def prediction(data):
+    data = format_datatype(data)
+    
+    # Load model
+    loaded_model = load_model()
 
     all_predicted_tag_ids = []
 

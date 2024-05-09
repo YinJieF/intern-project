@@ -61,5 +61,5 @@ def data_description(df):
     
     return data_html, dataset_shape
 
-# df = load_data('intern-project-415606', 'Criminal_Dataset', 'criminal_data_inorder', 2000)
-# print(data_description(df))
+#df = load_data('intern-project-415606', 'Criminal_Dataset', 'criminal_data_inorder', 100000)
+#print(data_description(df))
