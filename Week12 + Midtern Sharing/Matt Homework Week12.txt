@@ -1,0 +1,9 @@
+week11 homework 
+
+1.  NER Web train user name delete add accuracy  f1 score
+    
+2.RAG vector similaryty show ner web
+
+https://ithelp.ithome.com.tw/articles/10268777
+  
+3. report ptt demo
