@@ -1,0 +1,59 @@
+week13 homework 
+
+1.  database count :36550
+	use pdftxt column 
+    renew ner label use huggingface
+	https://huggingface.co/NlpHUST/ner-vietnamese-electra-base
+    retrain ner model output new ner weight
+	vector table in bigquery:Location,Person  ,Organization 
+   
+  
+2.RAG vector similaryty show ner web
+
+[{
+  "first_name": "LŨY",
+  "middle_name": "VĂN",
+  "last_name": "KHA",
+  "birth_date": "1993-05-08",
+  "company_name": "cty tnhh thuỷ sản kb",
+  "permanent_province_name": "Bạc Liêu",
+  "permanent_district_name": "Giá Rai",
+  "permanent_detailed_address": "Ấp Nhàn Dân A Tân Phong"
+}, {
+  "first_name": "THÀNH",
+  "middle_name": "CÔNG",
+  "last_name": "PHẠM",
+  "birth_date": "2001-12-06",
+  "company_name": "thăng long ",
+  "permanent_province_name": "Hưng Yên",
+  "permanent_district_name": "Mỹ Hào",
+  "permanent_detailed_address": "Tdp Phố Nối Bần Yên Nhân"
+}, {
+  "first_name": "QUỲNH",
+  "middle_name": "THỊ NHƯ",
+  "last_name": "NGUYỄN",
+  "birth_date": "2002-03-08",
+  "company_name": "an vat susu",
+  "permanent_province_name": "Hồ Chí Minh",
+  "permanent_district_name": "Bình Tân",
+  "permanent_detailed_address": "59/45/1 Mã Lò Bình Trị Đông A"
+}, {
+  "first_name": "TUẤN",
+  "middle_name": "VĂN",
+  "last_name": "TẠ",
+  "birth_date": "1993-08-25",
+  "company_name": "cty tnhh leo ",
+  "permanent_province_name": "Hải Dương",
+  "permanent_district_name": "Kim Thành",
+  "permanent_detailed_address": "Thôn Thượng Đỗ Thượng Vũ"
+}, {
+  "first_name": "ĐẠT",
+  "middle_name": "TIẾN",
+  "last_name": "NGUYỄN",
+  "birth_date": "1997-02-07",
+  "company_name": "tms solutions",
+  "permanent_province_name": "Lâm Đồng",
+  "permanent_district_name": "Bảo Lộc",
+  "permanent_detailed_address": "Tổ 6 Phường 2"
+}]
+  
