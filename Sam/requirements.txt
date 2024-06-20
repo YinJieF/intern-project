@@ -1,0 +1,7 @@
+Flask==3.0.2
+google-auth
+google-auth-oauthlib
+google-cloud-bigquery
+pytz
+langchain-core
+langchain-groq
