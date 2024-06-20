@@ -13,5 +13,3 @@ datasets
 tabulate
 db-dtypes
 rapidfuzz
-requests
-subprocess
