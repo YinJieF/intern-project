@@ -16,6 +16,7 @@ def info_compare():
         }
 
         result = comparison(input_data)
+        print(result)
         identical_result, similar_result = result['identical'], result['top_5_similar']
         # Return dataset shape and head as JSON
         return jsonify(identical_result=identical_result, similar_result=similar_result)
