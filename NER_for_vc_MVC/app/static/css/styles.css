@@ -1739,6 +1739,22 @@ progress {
     --bs-gutter-y: 3rem;
   }
 }
+.fixed-height-row {
+  height: 100px; /* Adjust this value as needed */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.vertical {
+  border-left: 2px solid #000;
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  margin-left: -1px;
+  top: 0;
+}
+
 .table {
   --bs-table-color: var(--bs-body-color);
   --bs-table-bg: transparent;
@@ -4331,6 +4347,11 @@ textarea.form-control-lg {
     border-bottom-left-radius: 0;
   }
 }
+.demo-card:hover {
+  background-color: #8f9ca5; /* Even darker shade when hovered */
+  transition: background-color 0.3s ease-in-out;
+}
+
 
 .accordion {
   --bs-accordion-color: #212529;

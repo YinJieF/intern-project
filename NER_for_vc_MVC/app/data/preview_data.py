@@ -59,7 +59,7 @@ def data_description(df):
     # Convert dataset shape to dictionary
     dataset_shape = {"rows": df.shape[0], "columns": df.shape[1]}
     
-    return data_html, dataset_shape
+    return data_html, dataset_shape    
 
 #df = load_data('intern-project-415606', 'Criminal_Dataset', 'criminal_data_inorder', 100000)
 #print(data_description(df))

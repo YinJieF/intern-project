@@ -21,14 +21,33 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/data">Data</a></li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/train">Training</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/inference">Inference</a></li>
+                        <!--A drop down menu-->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">NER services</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/data">Data</a></li>
+                                <li><a class="dropdown-item" href="/train">Train</a></li>
+                                <li><a class="dropdown-item" href="/inference">Inference</a></li>
+                                <li><a class="dropdown-item" href="/similarity">Similarity</a></li>
+                            </ul>
+                        </li>
+                        <!--End of drop down menu-->
+                        <!--A drop down menu-->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">LLM services</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/llm_generate">Extraction</a></li>
+                                <li><a class="dropdown-item" href="/llm_dataset">Preview</a></li>
+                                <li><a class="dropdown-item" href="/llm_similarity">Similarity</a></li>
+                                <li><a class="dropdown-item" href="/chatbot">Chatbot_Demo</a></li>
+                            </ul>
+                        </li>
                         <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
+
         <div class="row my-3 mx-5">
             <h1 class="font-weight-light">Model Training</h1>
             <p>Explore the Model Training Interface, where you can train models with a simple click. Choose your dataset and size effortlessly, tailored for Vietnamese crime data. With intuitive controls, select your dataset and size, initiating the training process seamlessly. This user-friendly interface puts the power of model training in your hands, making Named Entity Recognition (NER) technology accessible to you</p>
