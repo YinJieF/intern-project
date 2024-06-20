@@ -7,7 +7,7 @@ def process_text(input_text):
         chat = ChatGroq(
             temperature=0.5, 
             model_name="llama3-8b-8192", 
-            groq_api_key="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"
+            groq_api_key="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"
         )
         system = "You are a helpful assistant."
         prompt = ChatPromptTemplate.from_messages([
