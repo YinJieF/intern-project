@@ -4,7 +4,7 @@ import subprocess
 def comparison(input_data):
     try:
         # Obtain the identity token using gcloud
-        result = subprocess.run(['gcloud', 'auth', 'print-identity-token'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+        result = subprocess.run('gcloud auth print-identity-token', stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
         if result.returncode != 0:
             raise Exception(f"Error obtaining identity token: {result.stderr.decode('utf-8')}")
         
