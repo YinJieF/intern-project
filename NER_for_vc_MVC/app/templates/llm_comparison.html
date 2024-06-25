@@ -48,7 +48,6 @@
                                 <li><a class="dropdown-item" href="/llm_generate">Extraction</a></li>
                                 <li><a class="dropdown-item" href="/llm_dataset">Preview</a></li>
                                 <li><a class="dropdown-item" href="/llm_similarity">Similarity</a></li>
-                                <li><a class="dropdown-item" href="/chatbot">Chatbot_Demo</a></li>
                             </ul>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
@@ -185,6 +184,7 @@
                     personAddress: $('#personAddress').val(),
                     personBirthdate: $('#personBirthdate').val()
                 };
+                console.log(personData);
 
                 $('#submitButton').hide();
                 $('#loadingButton').show();
@@ -195,12 +195,14 @@
                     contentType: "application/json",
                     data: JSON.stringify(personData),
                     success: function(response) {
+                        console.log("response:",response);
                         $('#submitButton').show();
                         $('#loadingButton').hide();
                         updateIdentical(response.identical_result, '#identicalResults');
                         updateTable(response.similar_result, '#similarResults');
                     },
-                    error: function() {
+                    error: function(xhr, status, error) {
+                        console.log("An error occurred.", status, error);
                         $('#submitButton').show();
                         $('#loadingButton').hide();
                         alert('An error occurred. Please try again.');
@@ -208,6 +210,7 @@
                 });
             }
             function updateIdentical(data, tableId) {
+                console.log("table:", data);
                 var table = $(tableId).DataTable();
                 table.clear();
                 data.forEach(function(item) {
