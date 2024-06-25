@@ -2,8 +2,10 @@ from flask import render_template, request, jsonify
 from app.llm_gemini_compare.gemini_compare import comparison
 
 def info_compare():
+    print("info_compare")
     if request.method == 'POST':
         data = request.get_json()
+        print(data)
         input_data = {
             "person": {
                 "name": data.get('personName'),
