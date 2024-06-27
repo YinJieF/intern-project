@@ -46,7 +46,7 @@ safety_settings = [
 
 def extract_data(input_text):
 
-    genai.configure(api_key='AIzaSyDjdBpSE3KM7cebSEYwzpDvbeWnrIhRnXY')
+    genai.configure(api_key='')
     model = genai.GenerativeModel("gemini-1.5-pro-latest", safety_settings=safety_settings)
     
     response = model.generate_content(rule_prompt + input_text)
