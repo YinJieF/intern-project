@@ -10,3 +10,6 @@ To run the application locally, follow these steps:
 
 ## Changes
 - Word tokenize before prediction (app/inference/predict.py)
+
+## Changes after midterm
+- Use LLM (gemini) to replace NER
