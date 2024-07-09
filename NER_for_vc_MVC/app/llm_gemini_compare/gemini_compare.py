@@ -11,7 +11,7 @@ def comparison(input_data):
             raise Exception(f"Error obtaining identity token: {result.stderr.decode('utf-8')}")
         
         identity_token = result.stdout.decode('utf-8').strip()
-
+        
         # URL to which the POST request will be sent
         url = "https://us-central1-intern-project-415606.cloudfunctions.net/comparison"
 
