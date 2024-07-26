@@ -1,0 +1,140 @@
+import time
+
+def compare(name, gender, address, birthdate):
+    print("Comparing...")
+    print(name, gender, address, birthdate)
+    time.sleep(1)
+    return result
+
+result = {
+            "identical": [
+                {
+                    "birthdate": "1985-06-16",
+                    "crime": "Vi phạm quy định về tham gia giao thông đường bộ",
+                    "district_name": "H",
+                    "extract_id": 6865,
+                    "fine": "no",
+                    "fine_total": "no",
+                    "full_address": "Khối 5, thị trấn H, huyện H, tỉnh Nghệ An",
+                    "gender": "Male",
+                    "jail": "yes",
+                    "jail_duration": "15 months",
+                    "jlr_link": "https://congbobanan.toaan.gov.vn/2ta364631t1cvn/chi-tiet-ban-an",
+                    "name": "Trần Văn H",
+                    "other_punishment": "hưởng án treo; thời gian thử thách 30 tháng, tính từ ngày tuyên án sơ thẩm (26/9/2019)",
+                    "province_name": "Nghệ An",
+                    "standardized_fine_total": 0,
+                    "standardized_jail_duration": 15,
+                    "time": 1717077398000,
+                    "total_similarity": 100.0,
+                    "village_name": "Khối 5"
+                }
+            ],
+            "top_5_similar": [
+                {
+                    "birthdate": "1985-06-16",
+                    "crime": "Vi phạm quy định về tham gia giao thông đường bộ",
+                    "district_name": "H",
+                    "extract_id": 6865,
+                    "fine": "no",
+                    "fine_total": "no",
+                    "full_address": "Khối 5, thị trấn H, huyện H, tỉnh Nghệ An",
+                    "gender": "Male",
+                    "jail": "yes",
+                    "jail_duration": "15 months",
+                    "jlr_link": "https://congbobanan.toaan.gov.vn/2ta364631t1cvn/chi-tiet-ban-an",
+                    "name": "Trần Văn H",
+                    "other_punishment": "hưởng án treo; thời gian thử thách 30 tháng, tính từ ngày tuyên án sơ thẩm (26/9/2019)",
+                    "province_name": "Nghệ An",
+                    "standardized_fine_total": 0,
+                    "standardized_jail_duration": 15,
+                    "time": 1717077398000,
+                    "total_similarity": 100.0,
+                    "village_name": "Khối 5"
+                },
+                {
+                    "birthdate": "1998-10-16",
+                    "crime": "Illegal Possession of Drugs",
+                    "district_name": "D",
+                    "extract_id": 15541,
+                    "fine": "no",
+                    "fine_total": "no",
+                    "full_address": "xóm Mỹ T, xã Diễn Đ, huyện D, tỉnh Nghệ An",
+                    "gender": "Male",
+                    "jail": "yes",
+                    "jail_duration": "13 months",
+                    "jlr_link": "https://congbobanan.toaan.gov.vn/2ta757489t1cvn/chi-tiet-ban-an",
+                    "name": "Trần Văn H",
+                    "other_punishment": "no",
+                    "province_name": "Nghệ An",
+                    "standardized_fine_total": 0,
+                    "standardized_jail_duration": 13,
+                    "time": 1717709431000,
+                    "total_similarity": 94.0,
+                    "village_name": "Mỹ T"
+                },
+                {
+                    "birthdate": "1975-06-10",
+                    "crime": "Possession of illegal drugs",
+                    "district_name": "TĐ",
+                    "extract_id": 10003,
+                    "fine": "no",
+                    "fine_total": "no",
+                    "full_address": "Thôn B, xã B, huyện TĐ, tỉnh Vĩnh Phúc",
+                    "gender": "Male",
+                    "jail": "yes",
+                    "jail_duration": "1 year 6 months 0 days",
+                    "jlr_link": "https://congbobanan.toaan.gov.vn/2ta1125252t1cvn/chi-tiet-ban-an",
+                    "name": "Trần Văn H",
+                    "other_punishment": "no",
+                    "province_name": "Vĩnh Phúc",
+                    "standardized_fine_total": 0,
+                    "standardized_jail_duration": 18,
+                    "time": 1717666355000,
+                    "total_similarity": 94.0,
+                    "village_name": "B"
+                },
+                {
+                    "birthdate": "1998-07-10",
+                    "crime": "Buying and selling information about bank accounts illegally",
+                    "district_name": "Q.N",
+                    "extract_id": 21824,
+                    "fine": "no",
+                    "fine_total": "no",
+                    "full_address": "Tổ 37 P. H, Q.N, TP.Đà Nẵng",
+                    "gender": "Male",
+                    "jail": "yes",
+                    "jail_duration": "12 months",
+                    "jlr_link": "https://congbobanan.toaan.gov.vn/2ta1182977t1cvn/chi-tiet-ban-an",
+                    "name": "Trần Văn H",
+                    "other_punishment": "no",
+                    "province_name": "TP.Đà Nẵng",
+                    "standardized_fine_total": 0,
+                    "standardized_jail_duration": 12,
+                    "time": 1717740851000,
+                    "total_similarity": 91.0,
+                    "village_name": "Tổ 37 P. H"
+                },
+                {
+                    "birthdate": "1989-08-06",
+                    "crime": "Lạm dụng tín nhiệm chiếm đoạt tài sản",
+                    "district_name": "Đông Triều",
+                    "extract_id": 20744,
+                    "fine": "yes",
+                    "fine_total": "6.000.000đ",
+                    "full_address": "Khu K, phường K, thị xã Đ, tỉnh Quảng Ninh",
+                    "gender": "Male",
+                    "jail": "yes",
+                    "jail_duration": "12 months",
+                    "jlr_link": "https://congbobanan.toaan.gov.vn/2ta681447t1cvn/chi-tiet-ban-an",
+                    "name": "Trần Văn H",
+                    "other_punishment": "no",
+                    "province_name": "Quảng Ninh",
+                    "standardized_fine_total": 6000000,
+                    "standardized_jail_duration": 12,
+                    "time": 1717735490000,
+                    "total_similarity": 91.0,
+                    "village_name": "K"
+                }
+            ]
+        }

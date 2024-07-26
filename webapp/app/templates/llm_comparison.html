@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>NER web</title>
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='/assets/favicon.ico')}}" />
+        <link href="{{ url_for('static', filename='/css/styles.css')}}" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="{{ url_for('static', filename='js/scripts.js')}}"></script>
+        <style>
+            .loading {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container px-5">
+                <a class="navbar-brand" href="/">CDCDA Data Team GenAI Platform</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
+                        <!--A drop down menu-->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">NER services</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/data">Data</a></li>
+                                <li><a class="dropdown-item" href="/train">Train</a></li>
+                                <li><a class="dropdown-item" href="/inference">Inference</a></li>
+                                <li><a class="dropdown-item" href="/similarity">Similarity</a></li>
+                            </ul>
+                        </li>
+                        <!--End of drop down menu-->
+                        <!--A drop down menu-->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">LLM services</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/llm_generate">Extraction</a></li>
+                                <li><a class="dropdown-item" href="/llm_dataset">Preview</a></li>
+                                <li><a class="dropdown-item" href="/llm_similarity">Similarity</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="row my-3 mx-5">
+            <h1 class="font-weight-light">Information Comparison</h1>
+            <p my-0>通過法院判例名單，我們將為您找出與之最相似的五名罪犯。</p>
+        </div>
+
+        <div class="container mx-auto">
+            <div class="row my-3">
+                <div class="col-md-4">
+                    <div class="card">  
+                        <div class="card-body">
+                            <h5 class="card-title">Person Information</h5>
+                            <form id="personForm">
+                                <div class="mb-3">
+                                    <label for="personName" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="personName" placeholder="Enter name">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="personGender" class="form-label">Gender</label>
+                                    <select class="form-control" id="personGender">
+                                        <option value="">Select gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="personAddress" class="form-label">Address</label>
+                                    <input type="text" class="form-control" id="personAddress" placeholder="Enter address">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="personBirthdate" class="form-label">Birthday</label>
+                                    <input type="date" class="form-control" id="personBirthdate">
+                                </div>
+                                <button id="submitButton" type="button" class="btn btn-primary" onclick="submitPerson()">Search</button>
+                                <button id="loadingButton" class="btn btn-primary" type="button" style="display: none;" disabled>
+                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    <span>Loading...</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div class="card demo-card mt-3" onclick="fillDemoData1()">
+                        <div class="card-body">
+                            <h5 class="card-title">Demo Person 1</h5>
+                            <p class="card-text"><strong>Name:</strong> Trần Văn Hùng </p>
+                            <p class="card-text"><strong>Gender:</strong> Male </p>
+                            <p class="card-text"><strong>Address:</strong> 456 XYZ Avenue, Quận 1, Hồ Chí Minh </p>
+                            <p class="card-text"><strong>Birthday:</strong> 1985-07-15 </p>
+                        </div>
+                    </div>
+                    
+                    <div class="card demo-card mt-3" onclick="fillDemoData2()">
+                        <div class="card-body">
+                            <h5 class="card-title">Demo Person 2</h5>
+                            <p class="card-text"><strong>Name:</strong> Nguyễn Văn Gấu </p>
+                            <p class="card-text"><strong>Gender:</strong> Male </p>
+                            <p class="card-text"><strong>Address:</strong> Thôn 6, xã Cẩm Lĩnh, huyện CX, tỉnh HT </p>
+                            <p class="card-text"><strong>Birthday:</strong> 1992-09-01 </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="border border-dark rounded">
+                        <div class="p-3"> 
+                            <h5 class="mb-3">Identical Results</h5>
+                            <table id="identicalResults" class="display">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Gender</th>
+                                        <th>Birthdate</th>
+                                        <th>Address</th>
+                                        <th>Crime</th>
+                                        <th>Link</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                
+                    <div class="mt-4 border border-grey rounded">
+                        <div class="p-3">
+                            <h5 class="mb-3">Similar Results</h5>
+                            <table id="similarResults" class="display">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Gender</th>
+                                        <th>Birthdate</th>
+                                        <th>Address</th>
+                                        <th>Crime</th>
+                                        <th>Total Similarity</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+
+        <script>
+            function fillDemoData1() {
+                document.getElementById('personName').value = 'Trần Văn Hùng';
+                document.getElementById('personGender').value = 'Male';
+                document.getElementById('personAddress').value = '456 XYZ Avenue, Quận 1, Hồ Chí Minh';
+                document.getElementById('personBirthdate').value = '1985-07-15';
+            }
+
+            function fillDemoData2() {
+                document.getElementById('personName').value = 'Nguyễn Văn Gấu';
+                document.getElementById('personGender').value = 'Male';
+                document.getElementById('personAddress').value = 'Thôn 6, xã Cẩm Lĩnh, huyện CX, tỉnh HT';
+                document.getElementById('personBirthdate').value = '1992-09-01';
+            }
+
+            async function submitPerson() {
+                const personData = {
+                    personName: document.getElementById('personName').value,
+                    personGender: document.getElementById('personGender').value,
+                    personAddress: document.getElementById('personAddress').value,
+                    personBirthdate: document.getElementById('personBirthdate').value
+                };
+                console.log(personData);
+
+                const submitButton = document.getElementById('submitButton');
+                const loadingButton = document.getElementById('loadingButton');
+
+                submitButton.style.display = 'none';
+                loadingButton.style.display = 'block';
+
+                try {
+                    const response = await fetch("/llm_similarity", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(personData)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+
+                    const result = await response.json();
+                    console.log("response:", result);
+
+                    updateIdentical(result.identical_result, '#identicalResults');
+                    updateTable(result.similar_result, '#similarResults');
+                } catch (error) {
+                    console.log("An error occurred.", error);
+                    alert('An error occurred. Please try again.');
+                } finally {
+                    submitButton.style.display = 'block';
+                    loadingButton.style.display = 'none';
+                }
+            }
+
+            function updateIdentical(data, tableId) {
+                console.log("table:", data);
+                const table = $(tableId).DataTable();
+                table.clear();
+                data.forEach(function(item) {
+                    table.row.add([
+                        item.name,
+                        item.gender,
+                        item.birthdate,
+                        item.full_address,
+                        item.crime,
+                        '<a href="' + item.jlr_link + '">Judgement Link</a>'
+                    ]);
+                });
+                table.draw();
+            }
+
+            function updateTable(data, tableId) {
+                const table = $(tableId).DataTable();
+                table.clear();
+                data.forEach(function(item) {
+                    table.row.add([
+                        item.name,
+                        item.gender,
+                        item.birthdate,
+                        item.full_address,
+                        item.crime,
+                        item.total_similarity.toFixed(3) + '%'
+                    ]);
+                });
+                table.draw();
+            }
+
+            $(document).ready(function() {
+                $('#identicalResults').DataTable({
+                    "scrollX": false,
+                    "searching": false,
+                    "paging": false,
+                    "info": false,
+                    "ordering": false,
+                    "columnDefs": [
+                        { "width": "10%", "targets": 0 },
+                        { "width": "10%", "targets": 1 },
+                        { "width": "10%", "targets": 2 },
+                        { "width": "20%", "targets": 3 },
+                        { "width": "20%", "targets": 4 },
+                        { "width": "15%", "targets": 5 }
+                    ]
+                });
+                $('#similarResults').DataTable({
+                    "scrollX": false,
+                    "searching": false,
+                    "paging": false,
+                    "info": false,
+                    "ordering": false,
+                    "columnDefs": [
+                        { "width": "10%", "targets": 0 },
+                        { "width": "10%", "targets": 1 },
+                        { "width": "10%", "targets": 2 },
+                        { "width": "20%", "targets": 3 },
+                        { "width": "20%", "targets": 4 },
+                        { "width": "15%", "targets": 5 }
+                    ]
+                });
+            });
+        </script>
+    </body>
+</html>
