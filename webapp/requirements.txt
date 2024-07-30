@@ -1,0 +1,10 @@
+flask
+langchain-groq
+langchain-core
+google-api-python-client
+google-cloud-bigquery
+google-cloud-storage
+numpy
+pandas
+tabulate
+db-dtypes

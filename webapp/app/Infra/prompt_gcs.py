@@ -27,3 +27,5 @@ def get_prompt():
     with open(destination_file_name, 'r') as file:
         input_text = file.read()
         return input_text
+
+

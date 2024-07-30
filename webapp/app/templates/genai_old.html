@@ -5,20 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>GenAI PoC</title>
+    <title>GenAI poc</title>
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='/assets/favicon.ico')}}" />
     <link href="{{ url_for('static', filename='/css/styles.css')}}" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="{{ url_for('static', filename='js/scripts.js')}}"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-        }
         .loading {
             display: none;
         }
@@ -27,44 +24,6 @@
             padding: 10px;
             margin-top: 10px;
             min-height: 100px;
-        }
-        .navbar-brand {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-        .card {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-        .card:hover {
-            transform: translateY(-10px);
-        }
-        .demo-card {
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .demo-card:hover {
-            background-color: #f8f9fa;
-        }
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
-        }
-        .container {
-            max-width: 1200px;
-        }
-        .font-weight-light {
-            font-weight: 300;
-        }
-        .border-dark {
-            border-color: #343a40 !important;
-        }
-        .border-grey {
-            border-color: #6c757d !important;
         }
     </style>
 </head>
@@ -83,17 +42,15 @@
         </div>
     </nav>
 
-    <div class="container mx-auto mt-5">
-        <div class="row my-3">
-            <div class="col-md-12 text-center">
-                <h1 class="font-weight-light">Information Comparison</h1>
-                <p>通過法院判例名單，我們將為您找出與之最相似的五名罪犯。</p>
-            </div>
-        </div>
+    <div class="row my-3 mx-5">
+        <h1 class="font-weight-light">Information Comparison</h1>
+        <p my-0>通過法院判例名單，我們將為您找出與之最相似的五名罪犯。</p>
+    </div>
 
+    <div class="container mx-auto">
         <div class="row my-3">
             <div class="col-md-4">
-                <div class="card mb-4">
+                <div class="card">  
                     <div class="card-body">
                         <h5 class="card-title">Person Information</h5>
                         <form id="personForm">
@@ -117,8 +74,8 @@
                                 <label for="personBirthdate" class="form-label">Birthday</label>
                                 <input type="date" class="form-control" id="personBirthdate">
                             </div>
-                            <button id="submitButton" type="button" class="btn btn-primary w-100" onclick="submitPerson()">Search</button>
-                            <button id="loadingButton" class="btn btn-primary w-100 mt-2" type="button" style="display: none;" disabled>
+                            <button id="submitButton" type="button" class="btn btn-primary" onclick="submitPerson()">Search</button>
+                            <button id="loadingButton" class="btn btn-primary" type="button" style="display: none;" disabled>
                                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                 <span>Loading...</span>
                             </button>
@@ -148,60 +105,63 @@
             </div>
 
             <div class="col-md-8">
-                <div class="border border-dark rounded p-3 mb-4">
-                    <h5 class="mb-3">Identical Results</h5>
-                    <table id="identicalResults" class="display" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Gender</th>
-                                <th>Birthdate</th>
-                                <th>Address</th>
-                                <th>Crime</th>
-                                <th>Link</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
+                <div class="border border-dark rounded">
+                    <div class="p-3"> 
+                        <h5 class="mb-3">Identical Results</h5>
+                        <table id="identicalResults" class="display">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Gender</th>
+                                    <th>Birthdate</th>
+                                    <th>Address</th>
+                                    <th>Crime</th>
+                                    <th>Link</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
                 </div>
             
-                <div class="border border-grey rounded p-3 mb-4">
-                    <h5 class="mb-3">Similar Results</h5>
-                    <table id="similarResults" class="display" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Gender</th>
-                                <th>Birthdate</th>
-                                <th>Address</th>
-                                <th>Crime</th>
-                                <th>Total Similarity</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
+                <div class="mt-4 border border-grey rounded">
+                    <div class="p-3">
+                        <h5 class="mb-3">Similar Results</h5>
+                        <table id="similarResults" class="display">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Gender</th>
+                                    <th>Birthdate</th>
+                                    <th>Address</th>
+                                    <th>Crime</th>
+                                    <th>Total Similarity</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <div class="mt-4">
                     <h5 class="mb-3">Output</h5>
-                    <div id = "buttoncontainer" style= "position: relative;">
-                        <button id="showOutputButton" type="button" class="btn btn-secondary" onclick="showOutput()" disabled>Show Output</button>
-                        <button id="loadingOutputButton" type="button" class="btn btn-secondary" style="display: none;" disabled>
-                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                            <span>Loading...</span>
-                        </button>
-                    </div>
+                    <button id="showOutputButton" type="button" class="btn btn-secondary" onclick="showOutput()" disabled>Show Output</button>
+                    <button id="loadingOutputButton" type="button" class="btn btn-secondary" style="display: none;" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <span>Loading...</span>
+                    </button>
                 </div>
+
                 <div class="col-md-16 mt-3">
                     <div class="mb-3">
+                        <label for="outputText" class="form-label">Output Text</label>
                         <textarea class="form-control" id="outputText" rows="27" placeholder="Output will be displayed here..." readonly></textarea>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
-</body>
-
 
     <script>
         function fillDemoData1() {

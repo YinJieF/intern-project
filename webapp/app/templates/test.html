@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CDCDA Data Team GenAI Platform</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f9;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 1200px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .header h1 {
+            font-size: 1.5em;
+        }
+        .header nav a {
+            text-decoration: none;
+            color: #333;
+            margin-left: 20px;
+        }
+        .header nav a:hover {
+            text-decoration: underline;
+        }
+        .content {
+            margin-top: 20px;
+        }
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            max-width: 300px;
+        }
+        .form-container input,
+        .form-container select {
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .form-container button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+        .results {
+            margin-top: 20px;
+        }
+        .results table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .results th, .results td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .results th {
+            background-color: #f2f2f2;
+        }
+        .output button {
+            padding: 10px;
+            background-color: #6c757d;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .output button:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>CDCDA Data Team GenAI Platform</h1>
+            <nav>
+                <a href="#">Home</a>
+                <a href="#">About</a>
+            </nav>
+        </div>
+        <div class="content">
+            <h2>Information Comparison</h2>
+            <p>通过法院判例名单，我们将为您找出最相似的五名罪犯。</p>
+            <div class="form-container">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter name">
+                
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender">
+                    <option value="">Select gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+                
+                <label for="address">Address</label>
+                <input type="text" id="address" name="address" placeholder="Enter address">
+                
+                <label for="birthday">Birthday</label>
+                <input type="date" id="birthday" name="birthday">
+                
+                <button type="button">Search</button>
+            </div>
+            <div class="results">
+                <h3>Identical Results</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Gender</th>
+                            <th>Birthdate</th>
+                            <th>Address</th>
+                            <th>Crime</th>
+                            <th>Link</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="6">No data available in table</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h3>Similar Results</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Gender</th>
+                            <th>Birthdate</th>
+                            <th>Address</th>
+                            <th>Crime</th>
+                            <th>Total Similarity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="6">No data available in table</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="output">
+                <button type="button">Show Output</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

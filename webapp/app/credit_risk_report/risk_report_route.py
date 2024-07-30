@@ -16,3 +16,7 @@ def report_generate():
             risk_report = get_risk_report(name, url_match.group(1))
             print(risk_report)
             return jsonify(risk_report=risk_report)
+
+        else:
+            raise "No identical result found"
+
